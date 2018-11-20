@@ -1,0 +1,150 @@
+{% load static %}
+
+<html lang="en" id="page_result">
+
+<head>
+    <title>-Recommender</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'recomm/recomm.css'%}" >
+</head>
+
+<body >
+    <div class="header">
+        <div class="relative"><b> Recommender</b></div>
+        <div class="header-right">
+            {% if request.COOKIES.auth_code %}
+            <button  id="logout">logout</button> {% else %}
+            <button  data-toggle="modal" data-target="#modal-sm">login</button> {% endif %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    {% if not request.COOKIES.auth_code %}
+    <h3 align="left" id="headermsg">Please login to access debug Interface...</h3> {% endif %}
+    <div class="modal fade" id="modal-sm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content" style="background-color:#e4e4f6;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title w-100 font-weight-bold">Log In</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="text" placeholder="Username :" name="username" id="username" required>
+                    <input style="margin-top:5px;" type="password" placeholder="Password :" name="password" id="password" required>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <input type="submit" value="Login" id="login" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- below header -----------------------------------------------------------------------------------------------------  -->
+
+    {% if request.COOKIES.auth_code %}
+
+    <div class="row" style="">
+        <div class="col-sm-3" id="input_field">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="user_id" name="user_id" placeholder="User ID : ">
+                    <input type="text" class="form-control" id= "content_id" name="content_id" placeholder="Content ID : ">
+                </div>
+                <div class="form-group" style="">
+                    <select class="form-control" id="sel1" name="recommendation_bucket" onchange="myfunction(this.value)">
+                        <option value="recommended_for_you" >Recommended For You</option>
+                        <option value="recency" > Recommended For You (Recency)</option>
+                        <option value="recency_mou">Recommended For You (Recency+MOU)</option>
+                        <option value="mou">Recommended For You (MOU)</option>
+                    </select>
+                </div>
+                <button type="submit"  id="recomm" class="btn btn-default">Get Result</button>
+        </div>
+    </div>
+
+
+    <!--------------display results----------------------------------------------------------------------------------->
+
+
+
+            {%if table1 %}
+        <div class="col-sm-4" >
+                <div class="row">   <P id="table_heading">{{table1.heading}}</P></div>
+                <div class="row" id="table_container">
+                    <table class="tableinfo tablesorter" id="table1" >
+                        {% for obj in table1.results|slice:":1" %}
+                        <thead>
+                            <tr>
+                                <th>index</th>
+                                {% for key,value in obj.items %}
+                                <th>{{key}}</th>
+
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        {% endfor %}
+                        <tbody >
+                            {% for obj in table1.results %}
+                            <tr>
+                                <td>{{ forloop.counter }} </td>
+                                {% for key,value in obj.items %}
+                                <td>{{value}}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+        </div>{% endif %}
+
+         {% if table2 and table1 %}
+        <div class="col-sm-7" style="margin-left:5px;" >
+            {% elif  table2%}
+            <div class="col-sm-6" >
+            {% endif %}
+                <div class="row"> <P id="table_heading">{{table2.heading}}</P></div>
+                <div class="row" id="table_container">
+                    <table class="tableinfo tablesorter" id="table2">
+                        {% for obj in table2.results|slice:":1" %}
+                        <thead>
+                            <tr>
+                                <th>index</th>
+                                {% for key,value in obj.items %}
+                                <th>{{key}}</th>
+
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        {% endfor %}
+
+                        <tbody>
+                            {% for obj in table2.results %}
+                            <tr>
+                                <td>{{ forloop.counter }} </td>
+                                {% for key,value in obj.items %}
+                                <td>{{value}}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+    {% endif %}
+
+</body>
+<script src="{% static 'recomm/recomm.js' %}"> </script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.9.1/jquery.tablesorter.min.js"></script>
+
+
+</html>
+
+

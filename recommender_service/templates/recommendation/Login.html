@@ -1,0 +1,63 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Login - SMS</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="{% static 'notification/css/bootstrap.min.css'%}" rel="stylesheet">
+<link href="{% static 'notification/css/font-awesome.css'%}" rel="stylesheet">
+<link href="{% static 'notification/css/animate.css'%}" rel="stylesheet">
+<link href="{% static 'notification/css/style.css'%}" rel="stylesheet">
+<link href="{% static 'notification/css/cms.css'%}" rel="stylesheet">
+<link rel="icon" type="image/x-icon" href="{% static 'notification/images/apalya_logo.png' %}">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
+<body class="gray-bg">
+
+	<!-- Main Content Part Start -->
+	<section>
+		<div class="middle-box text-center loginscreen animated fadeInDown">
+			<div>
+				<div>
+					<img src="{% static 'notification/images/apalya_logo.png'%}" alt="apalya_logo">
+				</div>
+
+				<h3> Recommender </h3>
+				<p>Login, To see it in action.</p>
+				
+				
+				<form id="login_form" action="" method="post" novalidate="novalidate"><input type="hidden" name="_csrf" value="e9f64afd-75c9-46d3-9bec-c52ddfdb116e">
+					<div class="form-group">
+						<input type="text" name="username" class="form-control valid" placeholder="Username" id="user_name" required="" autofocus="" aria-required="true" aria-invalid="false">
+					</div>
+					<div class="form-group">
+						<input type="password" name="password" class="form-control valid" minlength="3" placeholder="Password" id="password" required="" aria-required="true" aria-invalid="false">
+					</div>
+					<button type="Submit" class="btn btn-primary block full-width m-b loginButton" id="load">
+						<i id="_loginButtonLoader" class="fa fa-spinner fa-spin" style="display: none;"></i>Login
+					</button>
+
+					<div class="">
+						<small>Copyright © 2018, Apalya Technologies.</small>
+					</div>
+					<div class="text-center">
+						<small>©2007-2018</small>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+
+	<script src="{% static 'notification/js/jquery-3.1.1.min.js'%}"></script>
+	<script src="{% static 'notification/js/bootstrap.min.js'%}"></script>
+	<script src="{% static 'notification/js/jquery.validate.min.js'%}"></script>
+    <script src="{% static 'notification/js/login.js'%}"></script>
+    <script src="{% static 'notification/js/cms.js'%}"></script>
+     
+	<div> 
+	</div>
+</body>
+</html>

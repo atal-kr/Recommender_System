@@ -1,0 +1,9 @@
+
+CELERYD_NODES=5
+CELERY_BIN="/opt/pyenv/myplex3.5/bin/celery"
+CELERY_APP="recommender_service"
+CELERYD_CHDIR="/opt/recommender/recommender_service/"
+CELERYD_USER="root"
+CELERYD_GROUP="root"
+CELERYBEAT_OPTS="--schedule=/var/run/celery/celerybeat-schedule"
+CELERYBEAT_CHDIR="/opt/recommender/recommender_service/"

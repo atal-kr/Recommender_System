@@ -1,0 +1,259 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Dash board - Personalized Notification</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'notification/css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{% static 'notification/css/animate.css'%}" rel="stylesheet">
+    <link href="{% static 'notification/css/style.css'%}" rel="stylesheet">
+    <link href="{% static 'notification/css/cms.css'%}" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="{% static 'notification/images/apalya_logo.png' %}">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+
+<body class=" pace-done">
+    <div class="pace  pace-inactive">
+        <div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
+            <div class="pace-progress-inner"></div>
+        </div>
+        <div class="pace-activity"></div>
+    </div>
+    <div id="pageloader">
+        <div class="loader-item">
+            <div class="spiner-example">
+                <div class="sk-spinner sk-spinner-wave">
+                    <div class="sk-rect1"></div>
+                    <div class="sk-rect2"></div>
+                    <div class="sk-rect3"></div>
+                    <div class="sk-rect4"></div>
+                    <div class="sk-rect5"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header Part Start -->
+    <!-- side menu start-->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <span> <img src="{% static 'notification/images/apalya_logo_light.png'%}" alt="apalya_logo">
+						</span>
+                    </div>
+                    <div class="logo-element">
+                        <img alt="image" class="img-circle" src="{% static 'notification/images/apalya_logo_light1.png'%}">
+                    </div>
+
+                </li>
+
+
+                <li><a href="{%url 'notification:view_recommendation'%}"><i class="fa fa-bell-o" aria-hidden="true"></i><span class="nav-label">View Notification</span></a></li>
+                <li><a href="{% url 'notification:view_summary'%}"><i class="fa fa-eye" aria-hidden="true"></i><span class="nav-label">View Summary</span></a></li>
+                <li class="active"><a href="{%url 'notification:send_notification'%}"><i class="fa fa-paper-plane" aria-hidden="true"></i><span class="nav-label">Send Notification</span></a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- side menu end-->
+    <!-- header menu start-->
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <!--<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>-->
+                    <h4>Notification Interface</h4>
+                </div>
+                <nav>
+                    <ul class="nav navbar-top-links navbar-right">
+                        <div class="navbar">
+                            <div class="navbar-inner">
+                                <div class="container-fluid">
+                                    <div class="nav-collapse ">
+                                        <ul class="nav navbar-top-links navbar-right">
+                                            <li><span>admin</span>
+                                            </li>
+                                            <li>
+                                                <a id="logout"> <i class="fa fa-sign-out"></i> Log out
+                                                </a>
+                                                <form name="logoutform" method="post" action="#logout" role="form">
+                                                    <input type="hidden" name="_csrf" value="cec523a0-878e-412c-bf12-2d31a25e38cd">
+                                                </form>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ul>
+                </nav>
+            </nav>
+        </div>
+
+        <!-- header menu end-->
+        <!-- Header Part End -->
+
+        <!-- Main Content Part Start -->
+        <section>
+
+            <!-- Navigation menu start -->
+            <div>
+                <div class="row wrapper border-bottom white-bg page-heading">
+                    <div class="col-lg-3 bread_crumb">
+                        <!--  <h2>FooTable</h2> -->
+                        <ol class="breadcrumb">
+                            <li><a href="#">Personalized</a></li>
+                            <li class="active"><strong> Notification</strong></li>
+
+                        </ol>
+
+                    </div>
+                    <div class="col-lg-9">
+
+                    </div>
+
+                </div>
+                {% if message %}
+                <div class="row wrapper border-bottom white-bg page-heading">
+                    <p style="text-align:center;padding:5px;font-size:16px;font-weight:bold;">{{message}}</p>
+                </div>
+                {% endif %}
+            </div>
+            <!-- Navigation menu end -->
+            <!-- <div th:if="${pager.totalPages == 0}"
+			class="alert alert-danger alert-dismissable">
+			<button aria-hidden="true" data-dismiss="alert" class="close"
+				type="button">×</button>
+			No Results found
+		</div> -->
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Send Notification</h5>
+
+                                <div class="ibox-tools">
+                                    <a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+                                    </a>
+
+                                    <ul class="dropdown-menu dropdown-user">
+                                        <li><a href="#">Config option 1</a></li>
+                                        <li><a href="#">Config option 2</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="Recommended-part">
+                                    <div class="col-sm-4">
+
+                                        <div class="send-rcmdt">
+
+                                            <form action="{% url 'notification:send'%}" enctype="multipart/form-data" method="post">{% csrf_token %}
+                                                <select class="div-toggle" data-target=".my-info-1" name="bucket" style=" width: 200px; height: 35px; font-size: 14px;">
+                                                    <option value="send_to_all" data-show=".citrus">Send to All</option>
+                                                    <option value="from_csv" data-show=".pome">Send From CSV</option>
+                                                </select>
+
+                                                <div class="my-info-1">
+                                                    <div class="citrus hide">
+
+                                                    </div>
+                                                    <div class="pome hide">
+                                                        <label>Upload CSV</label>
+                                                        <input type="file" name="csv_file" accept="image/*">
+                                                        <br/>
+                                                    </div>
+                                            </form>
+                                            <button type="button" onclick="track_notification(this.form)" class="btn btn-primary show">Send</button>
+                                            <div id="progress_bar" class="show"></div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            <div class="wrapper wrapper-content animated fadeInRight">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5>Update  Notification</h5>
+							<div class="ibox-tools">
+								<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+								</a>
+
+							</div>
+						</div>
+
+						<div class="ibox-content">
+						 <div class="Recommended-part">
+<div class="col-sm-4">
+
+<div class="send-rcmdt">
+
+    <form action="{% url 'notification:update'%}" enctype="multipart/form-data" method="post">{% csrf_token %}
+        <button type="button" onclick="this.form.submit()" class="btn btn-primary">Update </button>
+    </form>
+  </div>
+</div>
+</div>
+						 </div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+        </section>
+            </div>
+
+
+            <!-- footer part start -->
+            <!-- footer part end -->
+
+            <script src="{% static 'notification/js/jquery-3.1.1.min.js'%}"></script>
+            <script src="{% static 'notification/js/bootstrap.min.js'%}"></script>
+            <script src="{% static 'notification/js/jquery.validate.min.js'%}"></script>
+            <script src="{% static 'notification/js/logout.js'%}"></script>
+
+
+</body>
+<style>
+    .hide {
+        display: none;
+    }
+</style>
+<script>
+
+    $(document).on('change', '.div-toggle', function() {
+        var target = $(this).data('target');
+        var show = $("option:selected", this).data('show');
+        $(target).children().addClass('hide');
+        $(show).removeClass('hide');
+    });
+    $(document).ready(function() {
+        $('.div-toggle').trigger('change');
+    });
+</script>
+<script>
+
+    function track_notification(form){
+            form.submit();
+    }
+
+</script>
+
+</html>

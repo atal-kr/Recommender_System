@@ -1,0 +1,209 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Dash board - Personalized Notification</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="{% static 'notification/css/bootstrap.min.css'%}" rel="stylesheet">
+<link href="{% static 'notification/css/animate.css'%}" rel="stylesheet">
+<link href="{% static 'notification/css/style.css'%}" rel="stylesheet">
+<link href="{% static 'notification/css/cms.css'%}" rel="stylesheet">
+<link rel="icon" type="image/x-icon" href="{% static 'notification/images/apalya_logo.png' %}">
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+<body class=" pace-done"><div class="pace  pace-inactive"><div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
+  <div class="pace-progress-inner"></div>
+</div>
+<div class="pace-activity"></div></div>
+	<div id="pageloader">
+		<div class="loader-item">
+			<div class="spiner-example">
+				<div class="sk-spinner sk-spinner-wave">
+					<div class="sk-rect1"></div>
+					<div class="sk-rect2"></div>
+					<div class="sk-rect3"></div>
+					<div class="sk-rect4"></div>
+					<div class="sk-rect5"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Header Part Start -->
+	<!-- side menu start-->
+	<nav class="navbar-default navbar-static-side" role="navigation">
+		<div class="sidebar-collapse">
+			<ul class="nav metismenu" id="side-menu">
+				<li class="nav-header">
+					<div class="dropdown profile-element">
+						<span> <img alt="image" class="img-circle" src="{% static 'notification/images/apalya_logo_light.png'%}">
+						</span>
+					</div> 
+											<div class="logo-element">
+							<img alt="image" class="img-circle" src="{% static 'notification/images/apalya_logo_light1.png'%}">
+						</div>
+				
+				</li>
+
+				<li class="active"><a href="{%url 'notification:view_recommendation'%}"><i class="fa fa-bell-o" aria-hidden="true"></i><span class="nav-label">View Notification</span></a></li>
+				<li><a href="{% url 'notification:view_summary'%}"><i class="fa fa-eye" aria-hidden="true"></i><span class="nav-label">View Summary</span></a></li>
+				<li><a href="{%url 'notification:send_notification'%}"><i class="fa fa-paper-plane" aria-hidden="true"></i><span class="nav-label">Send Notification</span></a></li>
+			</ul>
+		</div>
+	</nav>
+	<!-- side menu end-->
+	<!-- header menu start-->
+	<div id="page-wrapper" class="gray-bg">
+		<div class="row border-bottom">
+			<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+				<div class="navbar-header">
+					<!--<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>-->
+					<h4>Notification Interface</h4>
+				</div>
+				<nav>
+					<ul class="nav navbar-top-links navbar-right">
+						<div class="navbar">
+							<div class="navbar-inner">
+								<div class="container-fluid">
+									<div class="nav-collapse ">
+										<ul class="nav navbar-top-links navbar-right">
+											<li><span>admin</span>
+											</li>
+											<li><a id="logout"> <i class="fa fa-sign-out"></i> Log out
+											</a>
+												</li>
+										</ul>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</ul>
+				</nav>
+			</nav>
+		</div>
+
+
+
+		<!-- header menu end-->
+		<!-- Header Part End -->
+
+		<!-- Main Content Part Start -->
+		<section>
+
+		<!-- Navigation menu start -->
+		<div>
+		<div class="row wrapper border-bottom white-bg page-heading">
+			<div class="col-lg-4 bread_crumb">
+				<!--  <h2>FooTable</h2> -->
+				<ol class="breadcrumb">
+					<li><a href="#">Personalized</a></li>
+					<li class="active"><strong>View  Notification</strong></li>
+				</ol>
+			</div>
+			<div class="col-lg-8">
+
+			</div>
+		</div>
+	</div>
+		<!-- Navigation menu end -->
+		<!-- <div th:if="${pager.totalPages == 0}"
+			class="alert alert-danger alert-dismissable">
+			<button aria-hidden="true" data-dismiss="alert" class="close"
+				type="button">×</button>
+			No Results found
+		</div> -->
+		<div class="wrapper wrapper-content animated fadeInRight">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5>View  Notification</h5>
+							
+
+							<div class="ibox-tools">
+								<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+								</a>
+
+								<ul class="dropdown-menu dropdown-user">
+									<li><a href="#">Config option 1</a></li>
+									<li><a href="#">Config option 2</a></li>
+								</ul>
+
+							</div>
+						</div>
+
+						<div class="ibox-content">
+						 <div class="Recommended-part">
+<div class="col-sm-6">
+<form action="{%url 'notification:view'%}" method="post">{% csrf_token %}
+<label>User ID</label>	 
+
+<input type="text" class="form-control" id="usr" name="user_id" placeholder="User ID :">
+<br/>
+<button type="button" class="btn btn-primary" onclick="this.form.submit()">Fetch Content</button>
+
+</form>
+<br>
+<br>
+	{% if results %}
+	<h4>Sent Notification History</h4>
+<table class="table table-responsive">
+ 						{% for obj in results|slice:":1" %}
+                        <thead>
+                            <tr>
+                                <th>index</th>
+                                {% for key,value in obj.items %}
+                                <th>{{key | upper}}</th>
+
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        {% endfor %}
+
+						<tbody style="overflow-y: scroll;height: 250px;position: absolute;">
+
+								{% for obj in results %}
+								<tr>
+								<td>{{forloop.counter}}</td>
+									{% for key,value in obj.items %}
+								<td> {{value}} </td>
+									{% endfor %}
+								</tr>
+
+						{% endfor %}
+						</tbody>
+						</table>
+	{% endif %}
+
+</div>						 
+						 </div>
+					
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</section>
+
+		<!-- footer part start -->
+		<!-- footer part end -->
+
+	</div>
+
+	<script src="{% static 'notification/js/jquery-3.1.1.min.js'%}"></script>
+	<script src="{% static 'notification/js/bootstrap.min.js'%}"></script>
+	<script src="{% static 'notification/js/jquery.validate.min.js'%}"></script>
+	<script src="{% static 'notification/js/logout.js'%}"></script>
+	<div>
+	</div>
+
+
+
+</body>
+
+</html>

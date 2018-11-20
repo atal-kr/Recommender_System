@@ -1,0 +1,17 @@
+django==1.11
+django-rest-framework
+django-rest-auth
+requests
+coreapi
+openapi_codec
+simplejson
+urllib3==1.22
+django-cron==0.5.1
+mysqlclient
+celery==4.2.1
+flower
+pandas
+djangorestframework-xml
+uwsgi
+gunicorn
+django-mysql==2.4.1

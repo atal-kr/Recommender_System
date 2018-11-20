@@ -1,0 +1,47 @@
+version: "2"
+services:
+  recommender_service:
+    container_name: django_server
+    image: atalkumar/recommender
+    volumes:
+      - app-static:/opt/recommender/recommender_service/static
+    ports:
+      - "8001:8001"
+  nginx:
+    restart: always
+    container_name: nginx_server
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    depends_on:
+    - recommender_service
+    links:
+      - recommender_service
+
+#    networks:
+#      - dsne-django-nginx
+    volumes:
+    - app-static:/opt/recommender/recommender_service/static
+
+    ports:
+    - "80:80"
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: docker
+      MYSQL_DATABASE: docker
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+    ports:
+      - "3306:3306"
+#  redis:
+#    container_name: redis
+#    image: redis:latest
+#    hostname: redis
+#    ports:
+#    - 6379:6379
+volumes:
+  app-static:
+  recommender_service:
+
+
